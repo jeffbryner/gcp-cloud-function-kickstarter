@@ -23,3 +23,9 @@ In the directory where you stored main.tf:
 - Voila! A basic kickstart.
 
 
+## Next steps
+This pattern is a simple 'zip and deploy' and doesn't take into account python dependencies, serverless/lambda/cloud function container architecture, etc.
+
+If your project includes crypto libraries, etc you will need to match the architecture of the runtime container used in the cloud.
+
+Next step for this project is to include a docker build layer to allow you to deploy your python function into the exact same container arch used in the GCP cloud function ala https://github.com/0xdefendA/defenda-data-lake/blob/master/generate_lambda_zip.py
