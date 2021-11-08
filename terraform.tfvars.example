@@ -1,1 +1,3 @@
-project_id ="a-gcp-project-ab123"
+project_id      = "prj-sample-project-ab123"
+project_name    = "prj-sample-project"
+billing_account = "01234-1AD35F-56AB7F"
