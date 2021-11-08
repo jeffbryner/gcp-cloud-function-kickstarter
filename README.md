@@ -14,10 +14,12 @@ This project is meant to be a terraform ci/cd friendly way to bootstrap your way
 
 Copy the terraform.tfvars.example as terraform.tfvars, retrieve the project ID for your target GCP project/environment and add it to the file.
 
-In the 'code' directory:
+In the directory where you stored main.tf:
 - terraform init
 - Import the target project into terraform ala: terraform import google_project.target prj-sample-project-id-goes-here
 - Edit terraform.tfvars to match the basic project elements (name, billing accoujnt, id)
-- Dry run a terraform plan to ensure your entries match, it should report no changes.
+- Make a copy of backend.tf.example as backend.tf with a proper bucket name, etc if you'd like to store terraform state in GCP and run terraform init --force-copy to copy state to the bucket.
+- A terraform apply should now create the zip file for the main.py function, upload it to a bucket, create a cloud function and emit the url for you to call it.
+- Voila! A basic kickstart.
 
 
