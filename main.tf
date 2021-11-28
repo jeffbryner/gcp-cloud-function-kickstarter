@@ -53,9 +53,9 @@ resource "google_storage_bucket" "function_bucket" {
 
 # upload zipped code to the bucket
 resource "google_storage_bucket_object" "function_zip" {
-  name   = "function.zip"
+  name   = format("%s-%s.zip", local.function_name, data.archive_file.source_zip.output_md5)
   bucket = google_storage_bucket.function_bucket.name
-  source = "${path.root}/source/function.zip"
+  source = "${path.root}/function.zip"
 }
 
 # create the cloud function
