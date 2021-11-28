@@ -62,7 +62,7 @@ resource "google_storage_bucket_object" "function_zip" {
 resource "google_cloudfunctions_function" "project_function" {
   project               = google_project.target.project_id
   name                  = local.function_name
-  description           = "project-function"
+  description           = format("%s-%s", local.function_name, data.archive_file.source_zip.output_md5)
   available_memory_mb   = 256
   source_archive_bucket = google_storage_bucket.function_bucket.name
   source_archive_object = google_storage_bucket_object.function_zip.name
@@ -71,6 +71,9 @@ resource "google_cloudfunctions_function" "project_function" {
   trigger_http          = true
   runtime               = "python38"
   region                = var.default_region
+  depends_on = [
+    google_storage_bucket_object.function_zip,
+  ]
 }
 
 
