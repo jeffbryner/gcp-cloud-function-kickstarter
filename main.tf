@@ -13,7 +13,9 @@ locals {
   billing_account      = var.billing_account
   function_bucket_name = "bkt-function-${local.project_id}"
   function_name        = "fnct-${var.function_name}-${local.project_id}"
-  services             = ["cloudfunctions.googleapis.com"]
+  services = [
+    "cloudfunctions.googleapis.com",
+  "cloudbuild.googleapis.com"]
 }
 
 
@@ -55,7 +57,7 @@ resource "google_storage_bucket" "function_bucket" {
 resource "google_storage_bucket_object" "function_zip" {
   name   = format("%s-%s.zip", local.function_name, data.archive_file.source_zip.output_md5)
   bucket = google_storage_bucket.function_bucket.name
-  source = "${path.root}/function.zip"
+  source = "${path.root}/source/function.zip"
 }
 
 # create the cloud function
